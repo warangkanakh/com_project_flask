@@ -1,0 +1,56 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="templates/css/header.css">
+ <style>
+        
+
+ </style>
+  </head>
+    <body>
+      
+      <div class = header> 
+        <h1 class = header-text> Fake News Detection</h1>
+        <h1 class = header-text2> ระบบตรวจสอบข่าวปลอมบนโลกออนไลน์</h1>
+      </div>   
+      <nav class="navbar navbar-light navbar-expand-md bg-custom ">
+        <div class="navbar-collapse justify-content-center">
+            <ul class="navbar-nav mx-auto ">
+              <li class="nav-item">
+            
+                <a class="nav-link" href="/acoutus">เกี่ยวกับ</a>
+            </li>
+                <li class="nav-item">
+            
+                    <a class="nav-link" href="/warning_news">ข่าวเฝ้าระวัง</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    ตรวจสอบข่าว
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/checkByText" style="font-family: DilleniaUPC, Times, serif;font-size: 24px;">จากข้อความ</a>
+                    <a class="dropdown-item" href="/checkByTweetLink" style="font-family: DilleniaUPC, Times, serif;font-size: 24px;">จาก Twitter Link</a>
+                </li>
+            </ul>        
+          </div>
+    </nav> 
+    <div class="white-space"></div>
+      <p class="text-center" style="font-size: 30px;font-weight: bold;" >วาง link ของทวีตที่ต้องการตรวจสอบที่นี่</p>
+      <p class="text-center"style="font-size: 26px;text-decoration: underline;">ตัวอย่าง </p> 
+      <p class="text-center" style="font-size: 26px;">https://twitter.com/AFNCThailand/status/1485870049281859586</p>
+        <form action = "result_tweet" method="POST" class="mx-auto" style="width: 500px;">
+          <div class="input-group">        
+            <textarea class="form-control" aria-label="With textarea" name="text"></textarea>
+          </div>
+          <br>
+          <br>
+          <button class="btn btn-outline-secondary" type="submit" style="font-size: 22px;">ตรวจสอบ</button>
+          </form>
+          <div class="white-space"></div>
+    </body>
+</html>
