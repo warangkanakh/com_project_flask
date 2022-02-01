@@ -48,7 +48,7 @@ def get_tweet_by_link(url):
         follower_list.append(follower.screen_name)
     return([content,author,create_date,verified_pic,retweeted,followers_count,profile_pic])
 
-start = time.time()
+#start = time.time()
 #print(get_tweet_by_link("https://twitter.com/Offchainon/status/1483631620519501827"))
-test = get_tweet_by_link("https://twitter.com/ttraisuree/status/1466343303998181378")
+#")
 #print('\ntimer %s seconds'%(time.time()-start))

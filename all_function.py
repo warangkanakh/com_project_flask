@@ -36,8 +36,6 @@ def search_related(input_text):
     found = search[2]
     return found
 
-
-
 def setFormat(text):
     text = str(text)
     if text=="0":
