@@ -31,16 +31,17 @@ auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth, wait_on_rate_limit=True)#set tweepy api
 query="ข่าวปลอม"
-count=100
+count=1000
+
+
 
 x = datetime.datetime.now()
 only_date = datetime.datetime.now().date()
-
 tz = timezone(timedelta(hours=7))
+  
 new_time = x.astimezone(tz)
-print(type(new_time))
-print(type(only_date))
 only_date=str(only_date)
+print(only_date)
 
 import re
 rt = 'RT'
@@ -49,81 +50,66 @@ vac_key ="วัคซีน"
 news_list = []
 news_list_detail = []
 for new_tweet in api.search_tweets(q=query,until=only_date):
-  tweet = new_tweet.text
-  if re.search(rt,tweet):
-    continue
-  else:
-    if re.search(covid_key,tweet) or  re.search(vac_key,tweet):
-      if tweet not in news_list:
-        news_list.append(tweet)
-        news_list_detail.append(new_tweet)
+    tweet = new_tweet.text
+    if re.search(rt,tweet):
+        continue
+    else:
+        if re.search(covid_key,tweet) or  re.search(vac_key,tweet):
+            if tweet not in news_list:
+                news_list.append(tweet)
+                news_list_detail.append(new_tweet)
 
 news_list_detail
 
+if len(news_list)!=0:
+  #key1 = ["ข่าวปลอม","อย่าแชร์","ข่าวปลอมอย่าแชร์","ไม่จริง","ไม่เป็นความจริง"]
+  news_list_clean = []
+  clean_link_re = 'https://t.co/.{10}'
 
-#key1 = ["ข่าวปลอม","อย่าแชร์","ข่าวปลอมอย่าแชร์","ไม่จริง","ไม่เป็นความจริง"]
-news_list_clean = []
-clean_link_re = 'https://t.co/.{10}'
-
-for i in news_list:
-    i = re.sub(clean_link_re, '', i)
-    news_list_clean.append(i)
-
-'''
-
-for i in news_list:
-  for j in range(len(key1)):
-    if re.search(key1[j],i):
-      i = i.replace(key1[j],'')
+  for i in news_list:
       i = re.sub(clean_link_re, '', i)
       news_list_clean.append(i)
 
-'''
-
-#news_str = news_list_clean[0]
-#news_str
-print(news_list_clean)
-
-
-import all_function
-predicted_list = []
-search_related_list = []
-datetime_list = []
-for i in news_list_clean:
-    index = int(news_list_clean.index(i))    
-    predicted = all_function.predicted(i)
-    
-    if predicted==1:
-        
+  import all_function
+  predicted_list = []
+  search_related_list = []
+  datetime_list = []
+  for i in news_list_clean:
+      index = int(news_list_clean.index(i))    
+      predicted = all_function.predicted(i)
+      if predicted==1:
         list_test =news_list_detail[index].entities['urls']
         url = list_test[index]['url']
         related_news = url
-    else:
-        related_news = all_function.search_related(i)
+      else:
+          related_news = all_function.search_related(i)
    
     
-    predicted_list.append(predicted)
-    search_related_list.append(related_news)
-    datetime = str(news_list_detail[index].created_at)
-    datetime_list.append(datetime)
+      predicted_list.append(predicted)
+      search_related_list.append(related_news)
+      datetime = str(news_list_detail[index].created_at)
+      datetime_list.append(datetime)
 
-print(predicted_list)
-print("----------------------------------------")
-print(search_related_list)
+  print(predicted_list)
+  print("----------------------------------------")
+  print(search_related_list)
 
-df = pd.DataFrame(columns=["datetime","news_text","predicted",'related_news'])
-df['datetime'] = datetime_list
-df['news_text'] = news_list_clean
-df['predicted'] = predicted_list
-df['related_news'] = search_related_list
+  df = pd.DataFrame(columns=["datetime","news_text","predicted",'related_news'])
+  df['datetime'] = datetime_list
+  df['news_text'] = news_list_clean
+  df['predicted'] = predicted_list
+  df['related_news'] = search_related_list
 
 
-news_dict = df.to_dict("records")
+  news_dict = df.to_dict("records")
 
-import pymongo
-from pymongo import MongoClient
-client =  MongoClient("mongodb+srv://warangkana_kh:Sadaharu123@cluster0.h4ueo.mongodb.net/fakenews_db?retryWrites=true&w=majority")
-db = client['fakenews_db']
-warning_news = db['warning_news']
+  import pymongo
+  from pymongo import MongoClient
+  client =  MongoClient("mongodb+srv://warangkana_kh:Sadaharu123@cluster0.h4ueo.mongodb.net/fakenews_db?retryWrites=true&w=majority")
+  db = client['fakenews_db']
+  warning_news = db['warning_news']
 
-warning_news.insert_many(news_dict)
+  warning_news.insert_many(news_dict)
+  print("add data completed ")
+else:
+    print("no news found")

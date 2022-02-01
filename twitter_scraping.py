@@ -68,11 +68,17 @@ def detect_similarity(Article):
     
         return relevance,duplicate
         
-    #get 3 urls relate article
+    #get 3 urls relate article 
+    #'voicetv.co.th','news.thaipbs.or.th','ch3plus.com','https://www.antifakenewscenter.com/'
     def search_relate(query) :  
         urls = []
-        for j in search(query, num_results=5):
-            urls.append(j)
+        site = ['thairath.co.th','khaosod.co.th','thestandard.co.th']
+        temp = query
+        for web in site:
+            query = temp
+            query = query+' site:'+web
+            for j in search(query,num_results=1):
+                urls.append(j)
         return urls
     
     #extact paragraph from url and apply check_sim function
@@ -177,8 +183,8 @@ def detect_similarity(Article):
     return ([Article,tokenized_maxpara[0],Max_url[0],Max_score[0],duplicate[0]])
 
 # start_time = time.time()
-# input_text = "hjkjkljklfdgf"
-# #input_text = "กรมอุตุนิยมวิทยา รายงานอุณหภูมิวันนี้ - พรุ่งนี้ (วันที่ 21-22 ธันวาคม 2564) พยากรณ์อากาศ 24 ชั่วโมงข้างหน้า บริเวณความกดอากาศสูงหรือมวลอากาศเย็นกำลังค่อนข้างแรงที่ปกคลุมประเทศไทยตอนบนมีกำลังอ่อนลง ทำให้บริเวณดังกล่าวมีอุณหภูมิสูงขึ้นกับมีหมอกในตอนเช้า แต่ยังคงมีอากาศเย็นถึงหนาวในภาคเหนือและภาคตะวันออกเฉียงเหนือส่วนภาคกลางและภาคตะวันออกมีอากาศเย็นในตอนเช้า"
-# result = detect_similarity(input_text)
-# print(result[0]+'\n\n similarity: '+str(result[3])+'\n from: '+result[2])
+#input_text = "ปภ.เร่งคลี่คลายสถานการณ์น้ำท่วมใน นครราชสีมา-สุพรรณบุรี ต่อเนื่อง"
+#result = detect_similarity(input_text)
+#print(result)
+# #print(result[1]+'\n\n similarity: '+str(result[3])+'\n from: '+result[2])
 # print("--- %s seconds ---" % (time.time() - start_time))

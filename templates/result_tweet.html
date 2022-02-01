@@ -8,6 +8,61 @@
     <link rel="stylesheet" href="css/header.css">
    
  <style>
+
+   /*menu & header*/
+   .header {
+    background-color: 071108;
+    text-align: center;
+    padding: 80px;
+    }
+      .mx-auto{
+        text-align: center;
+      }
+      .header-text {
+    font-family: "DilleniaUPC", Times, serif;
+    font-size: 100px;
+    color:white;
+    text-align: center;
+  }
+  .header-text2 {
+    font-family: "DilleniaUPC", Times, serif;
+    font-size: 70px;
+    color:white;
+    text-align: center;
+  }
+    .bg-custom{
+      background-color: 5EB1BF;
+    }
+    .navbar-light .navbar-brand{
+      font-family: "DilleniaUPC", Times, serif;
+      font-size: 30px;
+      color: white;
+      padding: 5px;
+    }
+    .navbar-nav .nav-item .nav-link{
+      font-family: "DilleniaUPC", Times, serif;
+      font-size: 30px;
+      color: white;
+    }  
+    body{
+        background-color: #f3f3f6;
+     }  
+
+    .list-group .list-group-item :active{
+            background-color: 071108;
+        
+     }
+    .white-space{
+        padding: 2%;
+      }
+      p{
+        font-family: "DilleniaUPC", Times, serif;
+      }
+
+      body{
+        font-family: "DilleniaUPC", Times, serif;
+      }
+
    
 
 
@@ -61,6 +116,9 @@ button:hover, a:hover {
 body{
  font-family: "DilleniaUPC", Times, serif;
 }
+้.h1{
+  font-family: "DilleniaUPC", Times, serif;
+}
 
  </style>
   </head>
@@ -71,16 +129,13 @@ body{
 <body>
  
   <div class = header> 
-    <h1 class = header-text> Fake News Detection</h1>
-    <h1 class = header-text2> ระบบตรวจสอบข่าวปลอมบนโลกออนไลน์</h1>
+    <h1 class = header-text> Fake news detection about COVID-19 vaccine </h1>
+        <h1 class = header-text2> ระบบตรวจสอบข่าวปลอมเกี่ยวกับวัคซีนโควิด-19 </h1>
   </div>   
   <nav class="navbar navbar-light navbar-expand-md bg-custom ">
     <div class="navbar-collapse justify-content-center">
         <ul class="navbar-nav mx-auto ">
-          <li class="nav-item">
-        
-            <a class="nav-link" href="/acoutus">เกี่ยวกับ</a>
-        </li>
+       
             <li class="nav-item">
         
                 <a class="nav-link" href="/warning_news">ข่าวเฝ้าระวัง</a>
@@ -105,15 +160,15 @@ body{
   
   <div class="card">
     <img src="{{all_detail[8]}}" alt="John" style="width:100%">
-    <h1>@{{all_detail[0]}}</h1>
-    <p class="title" style="font-size: 22px;">เครื่องหมายยืนยัน : <img src="{{all_detail[3]}}"style="width:10%"> </p>
-    <p style="font-size: 20px;">ผู้ติดตาม {{all_detail[5]}} คน</p>
+    <h1 style="font-size: 30px;">@{{all_detail[0]}}</h1>
+    <p class="title" style="font-size: 24px;">สถานะบัญชี : <img src="{{all_detail[3]}}"style="width:10%"> </p>
+    <p style="font-size: 22px;">ผู้ติดตาม {{all_detail[5]}} คน</p>
     <p><button></button></p>
   </div>
     <ul class="list-group" style="padding: 20px;">
       <li class="list-group-item active" style="text-align: center;font-size: 26px;">ข้อมูลการทวีต</li>
       <li class="list-group-item"style="font-size: 22px;">เนื้อหาที่ทวีต : {{all_detail[1]}} </li>
-      <li class="list-group-item"style="font-size: 22px;">วันและเวลาที่ทวีต : {{all_detail[2]}} </li>
+      <li class="list-group-item"style="font-size: 22px;">วันที่ทวีต : {{all_detail[2]}} </li>
       <li class="list-group-item"style="font-size: 22px;">จำนวนครั้งที่รีทวีต : {{all_detail[4]}} ครั้ง</li>
    <div class="seperator"></div>   
     </ul>
@@ -121,14 +176,25 @@ body{
       <ul class="list-group"style="padding: 20px;">
       <li class="list-group-item active" style="text-align: center;font-size: 26px;" >ผลการตรวจสอบ</li>
       <li class="list-group-item"style="font-size: 22px;">แบบจำลองทำนายว่า : <span id="output" >{{all_detail[6]}}</span> </li>
-      <li class="list-group-item"style="font-size: 22px;">ข่าวที่เกี่ยวข้อง : <a href="{{all_detail[4]}}" style="font-size: 20px;" >{{all_detail[7]}}</a></li>
+      <li class="list-group-item"style="font-size: 22px;">ข่าวที่เกี่ยวข้อง : <a href="{{all_detail[7]}}" style="font-size: 20px;" >{{all_detail[7]}}</a></li>
     </ul> </div>
-    
-</div>
-
-        </div>
+   
         
-        <script src="js_scripts/changeFont.js"></script>
+        <script>
+         
+
+var get_result = document.getElementById("output");
+var text_result = get_result.innerHTML;
+if(text_result=="มีแนวโน้มเป็นข่าวปลอม"){
+    get_result.style.color = "#FF4500";
+    
+}
+else{
+    get_result.style.color ="#32CD32";
+    
+    
+}
+        </script>
 <div class="white-space"></div>
     </body>
 </html>

@@ -13,18 +13,33 @@ from pythainlp.tag.named_entity import ThaiNameTagger
 ner = ThaiNameTagger()
 from sklearn import preprocessing
 import pymongo
+import datetime
+from datetime import timedelta
+from datetime import timezone
 
 myclient = pymongo.MongoClient("mongodb+srv://warangkana_kh:Sadaharu123@cluster0.h4ueo.mongodb.net/fakenews_db?retryWrites=true&w=majority")
 db = myclient['fakenews_db']
 warning_news = db['warning_news']
 
+x = datetime.datetime.now()
+only_date = datetime.datetime.now().date()
+tz = timezone(timedelta(hours=7))
+  
+new_time = x.astimezone(tz)
+only_date=str(only_date)
+only_date="2022-01-28"
+print(only_date)
 
 warning_list = []
 for i in warning_news.find():
+    if re.findall(only_date,i['datetime']):
         userdict = i
         warning_list.append(userdict)
 
+len_warning_list = len(warning_list)
+
 import all_function
+
 
 # import Function
 # new_model = tf.keras.models.load_model('my_model')
@@ -94,6 +109,7 @@ def fast_check_tweet():
 def text_result():
     text = request.form['text']
     predict = all_function.predicted(text)
+    predict = all_function.setFormat(predict)
     start_time = time.time()
     news_related = all_function.search_related(text)
     print("--- %s seconds ---" % (time.time() - start_time))
@@ -101,22 +117,26 @@ def text_result():
 
 @app.route("/warning_news")
 def warning_news(): 
-    if warning_list:
-        warning_list=="empty"
-    return render_template("warning_news.html",warning_news = warning_list)
+    print(warning_list)
+    return render_template("warning_news.html",warning_news = warning_list,len_news = len_warning_list,date=only_date)
 
 @app.route("/warning_news_detail/<id>")
 def warning_news_detail(id):
     id = str(id)
+    news_dict = {}
+    news_detail = []
     print(id)
     print(warning_list[0])
     for i in warning_list:
-        if re.search(id,str(i)):
-            print('news found')
-            news_detail = i
-    print(type(news_detail))
-    news_detail = list(news_detail.items())
-    print(type(news_detail))
+        if re.findall(id,str(i)):
+            news_dict = i
+            news_detail.append(news_dict)
+    #print(type(news_detail))
+    #news_detail = ['61f55f5dfc8f8a2b3d931155', '2022-01-28 23:31:35+00:00', 'แชร์กันที่ #ยูเครน\n\n"ผู้บริหาร Bayer บอกว่าการฉีดวัคซีน mRNA คือยีนบำบัด…"\n\n❌ ไม่จริง\n\n#ชัวร์ก่อนแชร์ #SureVac\nเสริ… ', 1, 'https://t.co/Mo1a8Ww5MU']
+    #news_detail[3] = all_function.setFormat(news_detail[3])
+    print(news_detail)
+  
+    #news_detail[3] = all_function.setFormat(news_detail[3])
     return render_template("warning_news_detail.html",all_detail = news_detail)
 
 
@@ -126,6 +146,10 @@ def tweet_result():
     print(text)
     all_detail = all_function.checkByLink(text)
     start_time = time.time()
-    print(type(all_detail))
+    #all_detail = ['ttraisuree','ข่าวปลอม เลือดของผู้ที่ฉีดวัคซีนโควิดมีสีดำคล้ำ ไม่สามารถนำไปใช้รักษาผู้ป่วยได้ :การฉีดวัคซีน ไม่ทำให้สีของโลหิตมีสีดำคล้ำ และเกิดการเปลี่ยนแปลงสีแต่อย่างใด สามารถบริจาคโลหิตได้ และไม่เป็นอันตรายต่อผู้รับโลหิต อ่านเพิ่มเติมที่ https://bit.ly/3I9rbmi AFNC Thailand 2 ธ.ค. 64','2021-12-02','https://sv1.picz.in.th/images/2022/01/30/naniIq.png',17,14434,"มีแนวโน้มเป็นข่าวจริง",'https://www.springnews.co.th/news/818778','http://pbs.twimg.com/profile_images/1179395115305095168/rhAVp-26_400x400.jpg']
+    print(all_detail)
+    all_detail[6] = all_function.setFormat(all_detail[6])
+    print(all_detail[6])
+
     print("--- %s seconds ---" % (time.time() - start_time))
     return render_template("result_tweet.html",all_detail = all_detail)

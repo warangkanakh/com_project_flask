@@ -18,12 +18,12 @@ from pythainlp.tag.named_entity import ThaiNameTagger
 ner = ThaiNameTagger()
 from sklearn import preprocessing
 
-File_9000 = 'dataset9000.csv'
+File_9000 = 'model_code/final_2000_clean.csv'
 f9000 = pd.read_csv(File_9000,encoding='utf-8')
 x = f9000['news']
 y = f9000['label']
-test_file = 'test10new.csv'
-test = pd.read_csv(test_file,encoding='utf-8')
+# test_file = 'test10new.csv'
+# test = pd.read_csv(test_file,encoding='utf-8')
 
 def preprocess(text):#input parameter as a list of text
     text_clean = []
@@ -86,6 +86,8 @@ def preprocess_label(label):#input as binarize data
     for i in label:
         LabelEncoded.append([int(i)])
     return tf.stack(LabelEncoded)
+
+
 #create encoded label
 #label = preprocess_label(y)
 
@@ -106,6 +108,7 @@ def create_model(encoder):
                   metrics=['accuracy'])
     model.summary()
     return model
+
 #create model use to predict data
 #model = create_model(encoder)
 #model.fit(data,label,batch_size=64,epochs=100)
@@ -120,4 +123,4 @@ print(type(result))
 '''
 
 #to save and load model
-#model.save('my_model')
+#model.save('my_model_new')

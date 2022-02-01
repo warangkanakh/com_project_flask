@@ -30,9 +30,9 @@ def get_tweet_by_link(url):
     verified = user.verified
     verified_pic=""
     if verified==True:
-        verified_pic ="https://i.ibb.co/HBXQZgY/verified.png"
+        verified_pic ="https://sv1.picz.in.th/images/2022/01/30/nauem1.png"
     else:
-        verified_pic="https://i.ibb.co/85SHtFn/unverified.png"
+        verified_pic="https://sv1.picz.in.th/images/2022/01/30/naniIq.png"
     retweeted = status.retweet_count
     followers_count = user.followers_count
     profile_pic = user.profile_image_url
@@ -50,6 +50,5 @@ def get_tweet_by_link(url):
 
 start = time.time()
 #print(get_tweet_by_link("https://twitter.com/Offchainon/status/1483631620519501827"))
-#print(get_tweet_by_link("https://twitter.com/23jpeg/status/1486834254797426688"))
-print('\ntimer %s seconds'%(time.time()-start))
-print(tweepy.__version__)
+test = get_tweet_by_link("https://twitter.com/ttraisuree/status/1466343303998181378")
+#print('\ntimer %s seconds'%(time.time()-start))

@@ -4,12 +4,21 @@ import Function #model
 import getTweetById
 import twitter_scraping #related_news
 
+import datetime
+from datetime import timedelta
+from datetime import timezone
 
+
+
+# def dateFormat(text):
+#     tz = timezone(timedelta(hours=7))
+#     new_time = text.astimezone(tz) 
+#     return new_time
 
 
 
 #model predict function
-new_model = tf.keras.models.load_model('my_model')
+new_model = tf.keras.models.load_model('my_model_new')
 def predicted(input_text):
     result = Function.preprocess_input_text(input_text)
     predicted = new_model.predict(result)
@@ -17,12 +26,7 @@ def predicted(input_text):
     result_binary = int(predicted[0][0])
     
     print(result_binary)
-    result_str = ''
-    if result_binary ==0:
-        result_str='FALSE'
-    else:
-        result_str='ไม่มีแนวโน้มเป็นข่าวปลอม'
-    
+  
     return result_binary
 
 
@@ -32,20 +36,27 @@ def search_related(input_text):
     found = search[2]
     return found
 
+
+
+def setFormat(text):
+    text = str(text)
+    if text=="0":
+        text = "มีแนวโน้มเป็นข่าวปลอม"
+    else:
+        text ="มีแนวโน้มเป็นข่าวจริง"
+    return text
+
 #link tweet function
 def checkByLink(Link):
     tweet_detail = getTweetById.get_tweet_by_link(Link)
     status = tweet_detail[0]
     predictedBy_model = predicted(status)
+    predictedBy_model = setFormat(predictedBy_model)
     related_news = search_related(status)
 
     user = tweet_detail[1]
     created_at = tweet_detail[2]
     verified = tweet_detail[3]
-    if verified=="True":
-        verified = "Verified"
-    else:
-        verified = "Unverified"
     retweeted = tweet_detail[4]
     followers = tweet_detail[5]
     profile_pic = tweet_detail[6]

@@ -8,6 +8,60 @@
     <link rel="stylesheet" href="css/header.css">
  <style>
    
+   /*menu & header*/
+   .header {
+    background-color: 071108;
+    text-align: center;
+    padding: 80px;
+    }
+      .mx-auto{
+        text-align: center;
+      }
+      .header-text {
+    font-family: "DilleniaUPC", Times, serif;
+    font-size: 100px;
+    color:white;
+    text-align: center;
+  }
+  .header-text2 {
+    font-family: "DilleniaUPC", Times, serif;
+    font-size: 70px;
+    color:white;
+    text-align: center;
+  }
+    .bg-custom{
+      background-color: 5EB1BF;
+    }
+    .navbar-light .navbar-brand{
+      font-family: "DilleniaUPC", Times, serif;
+      font-size: 30px;
+      color: white;
+      padding: 5px;
+    }
+    .navbar-nav .nav-item .nav-link{
+      font-family: "DilleniaUPC", Times, serif;
+      font-size: 30px;
+      color: white;
+    }  
+    body{
+        background-color: #f3f3f6;
+     }  
+
+    .list-group .list-group-item :active{
+            background-color: 071108;
+        
+     }
+     .white-space{
+        padding: 3%;
+      }
+      p{
+        font-family: "DilleniaUPC", Times, serif;
+      }
+
+      body{
+        font-family: "DilleniaUPC", Times, serif;
+      }
+
 
 
 /*for profile card*/
@@ -32,18 +86,14 @@
 <body>
 
   <div class = header> 
-    <h1 class = header-text> Fake News Detection</h1>
-    <h1 class = header-text2> ระบบตรวจสอบข่าวปลอมบนโลกออนไลน์</h1>
+    <h1 class = header-text> Fake news detection about COVID-19 vaccine </h1>
+    <h1 class = header-text2> ระบบตรวจสอบข่าวปลอมเกี่ยวกับวัคซีนโควิด-19 </h1>
   </div>   
   <nav class="navbar navbar-light navbar-expand-md bg-custom ">
     <div class="navbar-collapse justify-content-center">
-        <ul class="navbar-nav mx-auto ">
-          <li class="nav-item">
-        
-            <a class="nav-link" href="/acoutus">เกี่ยวกับ</a>
-        </li>
+        <ul class="navbar-nav mx-auto" style="width:500px">
+      
             <li class="nav-item">
-        
                 <a class="nav-link" href="/warning_news">ข่าวเฝ้าระวัง</a>
             </li>
             <li class="nav-item dropdown">
@@ -64,21 +114,32 @@
   
     <ul class="list-group" style="padding: 10px;">
       <li class="list-group-item active" style="text-align: center;font-size: 26px;">ข้อมูลการตรวจสอบ</li>
-      <li class="list-group-item" style="font-size: 22px;">เนื้อหาที่นำมาตรวจสอบ :{{recent_text}} </li>
+      <li class="list-group-item" style="font-size: 22px;">เนื้อหาที่นำมาตรวจสอบ : {{recent_text}} </li>
    <div class="seperator"></div>   
     </ul>
     <div class="sticky-bottom">
       <ul class="list-group"style="padding: 10px;">
       <li class="list-group-item active" style="text-align: center;font-size: 26px;" >ผลการตรวจสอบ</li>
       <li class="list-group-item" style="font-size: 22px;" >แบบจำลองทำนายว่า : <span id="output">{{predict}}</span> </li>
-      <li class="list-group-item"style="font-size: 22px;" >ข่าวที่เกี่ยวข้อง : <a href="{{related}}" style="font-size: 15px;">{{related}}</a></li>
+      <li class="list-group-item"style="font-size: 22px;" >ข่าวที่เกี่ยวข้อง : <a href="{{related}}" style="font-size: 20px;">{{related}}</a></li>
     </ul> </div>
     
 </div>
           
 
         </div>
-        <script src="js_scripts/changeFont.js"></script>
+        <script>
+          var get_result = document.getElementById("output");
+          var text_result = get_result.innerHTML
+          if(text_result=="มีแนวโน้มเป็นข่าวปลอม"){
+            
+              get_result.style.color = "#FF4500";
+          }
+          else{
+       
+              get_result.style.color ="#32CD32"
+              
+          }</script>
       
      
 
