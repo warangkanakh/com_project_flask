@@ -30,8 +30,8 @@ access_token_secret='AYrRow7HiU2EUcdQx6co7ZT7dqMnweFOtvOdxHhyJZJYZ'
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth, wait_on_rate_limit=True)#set tweepy api
-query="ข่าวปลอม"
-count=1000
+query= ["ไม่จริง","ข่าวปลอม"]
+count=100
 
 
 
@@ -49,33 +49,36 @@ covid_key = "โควิด"
 vac_key ="วัคซีน"
 news_list = []
 news_list_detail = []
-for new_tweet in api.search_tweets(q=query,until=only_date):
-    tweet = new_tweet.text
-    if re.search(rt,tweet):
-        continue
-    else:
-        if re.search(covid_key,tweet) or  re.search(vac_key,tweet):
-            if tweet not in news_list:
-                news_list.append(tweet)
-                news_list_detail.append(new_tweet)
+
+for i in query:
+    for new_tweet in api.search_tweets(q=i,until=only_date):
+        tweet = new_tweet.text
+        if re.search(rt,tweet):
+            continue
+        else:
+            if re.search(covid_key,tweet) or  re.search(vac_key,tweet):
+                if tweet not in news_list:
+                    news_list.append(tweet)
+                    news_list_detail.append(new_tweet)
 
 news_list_detail
 
 if len(news_list)!=0:
   #key1 = ["ข่าวปลอม","อย่าแชร์","ข่าวปลอมอย่าแชร์","ไม่จริง","ไม่เป็นความจริง"]
+  '''
   news_list_clean = []
   clean_link_re = 'https://t.co/.{10}'
 
   for i in news_list:
       i = re.sub(clean_link_re, '', i)
       news_list_clean.append(i)
-
+'''
   import all_function
   predicted_list = []
   search_related_list = []
   datetime_list = []
-  for i in news_list_clean:
-      index = int(news_list_clean.index(i))    
+  for i in news_list:
+      index = int(news_list.index(i))    
       predicted = all_function.predicted(i)
       if predicted==1:
         list_test =news_list_detail[index].entities['urls']
@@ -96,7 +99,7 @@ if len(news_list)!=0:
 
   df = pd.DataFrame(columns=["datetime","news_text","predicted",'related_news'])
   df['datetime'] = datetime_list
-  df['news_text'] = news_list_clean
+  df['news_text'] = news_list
   df['predicted'] = predicted_list
   df['related_news'] = search_related_list
 
