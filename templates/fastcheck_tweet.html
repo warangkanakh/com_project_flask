@@ -46,6 +46,11 @@
         alert("กรุณากรอก link");
         return false
       }
+      else{
+        document.getElementById('submitbutton').disabled = true;
+        document.getElementById('submitbutton').style.opacity='0.5';
+      }
+      return true
     }
   </script>
 
@@ -91,13 +96,13 @@
     <section id="blog" class="blog" style="text-align: center;" >
       <div class="container" data-aos="fade-up">
         <p class="text-center" style="font-size: 30px;font-weight: bold;" >วางลิงก์ของทวีตที่ต้องการตรวจสอบที่นี่</p>
-        <form action = "result_tweet" name="bylink" method="POST" class="mx-auto" style="width: 500px;" onsubmit="checkEmpty()" required>
+        <form action = "result_tweet" name="bylink" method="POST" class="mx-auto" style="width: 500px;" onsubmit="return checkEmpty();" required>
           <div class="input-group">        
             <textarea class="form-control" aria-label="With textarea" name="text" style="font-size: 22px;" placeholder="https://twitter.com/AFNCThailand/status/1485870049281859586"></textarea>
           </div>
           <br>
           <br>
-          <button class="btn btn-outline-secondary" type="submit" style="font-size: 22px;">ตรวจสอบ</button>
+          <button class="btn btn-outline-secondary" id="submitbutton" type="submit" style="font-size: 22px;" >ตรวจสอบ</button>
           </form>
           <br>
           <br>

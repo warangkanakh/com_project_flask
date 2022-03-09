@@ -84,12 +84,12 @@
 
         <div class="white-space"></div>
         <p class="text-center"style="font-size: 30px;font-weight: bold;">วางข้อความที่ต้องการตรวจสอบที่นี่</p>
-        <form name = "bytext"action = "result" method="POST" class="mx-auto" style="width: 500px;" onsubmit="checkEmpty()" required>
+        <form name = "bytext"action = "result" method="POST" class="mx-auto" style="width: 500px;" onsubmit="return checkEmpty();" required>
           <div class="input-group">        
             <textarea class="form-control" aria-label="With textarea" id="text" name="text" rows="4" style="font-size: 22px" maxlength="280" size="280" placeholder="ฉีดวัคซีนไฟเซอร์หรือโมเดอร์นา จะมีชีวิตอยู่ได้ไม่เกิน 2 ปี"></textarea>
           </div>
           <br>
-          <button class="btn btn-outline-secondary" type="submit" style="font-size: 22px;">ตรวจสอบ</button>
+          <button class="btn btn-outline-secondary" id="submitbutton" type="submit" style="font-size: 22px;">ตรวจสอบ</button>
           <br>  
         </form>
           <br>
@@ -106,11 +106,16 @@
               alert("กรุณากรอกข้อความ");
               return false
             }
+            else{
+          document.getElementById('submitbutton').disabled = true;
+          document.getElementById('submitbutton').style.opacity='0.5';
+         }
+            return true
           }
         </script>
 
         </div>
-
+    
       </div>
     </section><!-- End Blog Section -->
 

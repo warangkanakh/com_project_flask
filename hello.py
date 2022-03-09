@@ -54,13 +54,10 @@ def fast_check():
 def fast_check_tweet():
     return render_template("fastcheck_tweet.html")
 
-@app.route("/license")
-def license():
-    return render_template("license.html")
 
-@app.route("/about_us")
-def about_us():
-    return render_template("about_us.html")
+@app.route("/error")
+def error():
+    return render_template("error.html")
 
 #A POST request can include a query string, however normally it doesn't 
 #a standard HTML form with a POST action will not normally include a query string for example.
@@ -77,7 +74,7 @@ def text_result():
         #print("--- %s seconds ---" % (time.time() - start_time))
         return render_template("result.html",recent_text=text,predict = predict,related=news_related)
     except:
-        return render_template("error.hrml")
+        return render_template("error.html")
 @app.route("/warning_news")
 def warning_news(): 
     #print(warning_list)
@@ -100,4 +97,4 @@ def tweet_result():
         #print("--- %s seconds ---" % (time.time() - start_time))
         return render_template("result_tweet.html",all_detail = all_detail)
     except:
-        return render_template("error.hrml")
+        return render_template("error.html")

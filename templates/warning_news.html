@@ -101,7 +101,7 @@
             <th scope="row">{{news_i['datetime']}}</th>
             <td>{{news_i['news_text']}}</td>
             <td id="output">{{news_i['predicted']}}</td>
-            <td><a href = "{{news_i['related_news']}}">{{news_i['related_news']}}</a></td>
+            <td><a href = "{{news_i['related_news']}}" class="related_news">{{news_i['related_news']}}</a></td>
           </tr>
           {% endfor %}
         {% endif%}
