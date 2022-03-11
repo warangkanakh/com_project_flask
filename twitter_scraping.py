@@ -180,11 +180,13 @@ def detect_similarity(Article):
     tokenized_maxpara = most_sim_list[::-1]
     Max_url = urls[::-1]
     duplicate = duplicate_list[::-1]
-    return ([Article,tokenized_maxpara[0],Max_url[0],Max_score[0],duplicate[0]])
+   
 
 # start_time = time.time()
-#input_text = "ปภ.เร่งคลี่คลายสถานการณ์น้ำท่วมใน นครราชสีมา-สุพรรณบุรี ต่อเนื่อง"
-#result = detect_similarity(input_text)
-#print(result)
+'''
+input_text = "#sureandshare แชร์กันที่ #สหรัฐอเมริกา ไวรัส HIV VB เกิดกับคนที่ฉีด #วัคซีนโควิด… ❌ #ไม่จริง ชัวร์ก่อนแชร์… https://t.co/FDlfwVWbIn"
+result = detect_similarity(input_text)
+print(result)
+'''
 # #print(result[1]+'\n\n similarity: '+str(result[3])+'\n from: '+result[2])
 # print("--- %s seconds ---" % (time.time() - start_time))

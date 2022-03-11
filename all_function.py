@@ -34,6 +34,7 @@ def predicted(input_text):
 def search_related(input_text):
     search = twitter_scraping.detect_similarity(input_text)
     found = search[2]
+ 
     return found
 
 def setFormat(text):
