@@ -2,7 +2,7 @@ import tensorflow as tf
 from sklearn import preprocessing
 import Function #model
 import getTweetById
-import twitter_scraping #related_news
+import related_news #related_news
 
 import datetime
 from datetime import timedelta
@@ -25,16 +25,14 @@ def predicted(input_text):
     predicted = preprocessing.binarize(predicted)
     result_binary = int(predicted[0][0])
     
-    print(result_binary)
   
     return result_binary
 
 
 #search_related function
 def search_related(input_text):
-    search = twitter_scraping.detect_similarity(input_text)
+    search = related_news.detect_similarity(input_text)
     found = search[2]
- 
     return found
 
 def setFormat(text):

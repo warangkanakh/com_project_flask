@@ -68,11 +68,11 @@ def detect_similarity(Article):
     
         return relevance,duplicate
         
-    #get 3 urls relate article 
-    #'voicetv.co.th','news.thaipbs.or.th','ch3plus.com','https://www.antifakenewscenter.com/'
+    #get 3 urls relate article
     def search_relate(query) :  
         urls = []
-        site = ['thairath.co.th','khaosod.co.th','thestandard.co.th']
+        site = ['thairath.co.th','khaosod.co.th','thestandard.co.th','voicetv.co.th'
+                ,'news.thaipbs.or.th','ch3plus.com']
         temp = query
         for web in site:
             query = temp
@@ -180,13 +180,10 @@ def detect_similarity(Article):
     tokenized_maxpara = most_sim_list[::-1]
     Max_url = urls[::-1]
     duplicate = duplicate_list[::-1]
-   
+    return ([Article,tokenized_maxpara[0],Max_url[0],Max_score[0],duplicate[0]])
 
-# start_time = time.time()
 '''
-input_text = "#sureandshare แชร์กันที่ #สหรัฐอเมริกา ไวรัส HIV VB เกิดกับคนที่ฉีด #วัคซีนโควิด… ❌ #ไม่จริง ชัวร์ก่อนแชร์… https://t.co/FDlfwVWbIn"
+input_text = "ฉีดวัคซีนไฟเซอร์หรือโมเดอร์นา จะมีชีวิตอยู่ได้ไม่เกิน 2 ปี"
 result = detect_similarity(input_text)
-print(result)
+print(result[2])
 '''
-# #print(result[1]+'\n\n similarity: '+str(result[3])+'\n from: '+result[2])
-# print("--- %s seconds ---" % (time.time() - start_time))
