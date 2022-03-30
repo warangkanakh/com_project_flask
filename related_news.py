@@ -71,14 +71,13 @@ def detect_similarity(Article):
     #get 3 urls relate article
     def search_relate(query) :  
         urls = []
-        site = ['thairath.co.th','khaosod.co.th','thestandard.co.th','voicetv.co.th'
-                ,'news.thaipbs.or.th','ch3plus.com']
-        temp = query
-        for web in site:
-            query = temp
-            query = query+' site:'+web
-            for j in search(query,num_results=1):
-                urls.append(j)
+        site = ['thairath.co.th','khaosod.co.th','thestandard.co.th']
+        query = query+' site:'+" OR site:".join(site)
+        for j in search(query,num_results = 1):
+             urls.append(j)
+             
+        print('url: ',urls)
+        print('num:',len(urls))
         return urls
     
     #extact paragraph from url and apply check_sim function
@@ -182,8 +181,10 @@ def detect_similarity(Article):
     duplicate = duplicate_list[::-1]
     return ([Article,tokenized_maxpara[0],Max_url[0],Max_score[0],duplicate[0]])
 
-'''
-input_text = "ฉีดวัคซีนไฟเซอร์หรือโมเดอร์นา จะมีชีวิตอยู่ได้ไม่เกิน 2 ปี"
+''' 
+start_time = time.time()
+input_text = "ปภ.เร่งคลี่คลายสถานการณ์น้ำท่วมใน นครราชสีมา-สุพรรณบุรี ต่อเนื่อง"
 result = detect_similarity(input_text)
-print(result[2])
+print(''.join(result[1])+'\n\n similarity: '+str(result[3])+'\n from: '+result[2])
+print("--- %s seconds ---" % (time.time() - start_time))
 '''

@@ -6,20 +6,22 @@ Created on Mon Jan 17 14:43:23 2022
 """
 import tweepy
 import time
+consumer_key='96Rm00PfMEwtkBjhBoWlGwzDG'
+consumer_secret='DUdU7P0CpbOAb0whx5pq28qEWlMsZOk3d9DkNZHyvj1bYOPldU'
+    
+access_token='1214597752098717696-ID8wKAYJgZ3H35ebMAFkVKV1py6w19'
+access_token_secret='AYrRow7HiU2EUcdQx6co7ZT7dqMnweFOtvOdxHhyJZJYZ'
+auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+auth.set_access_token(access_token, access_token_secret)
+api = tweepy.API(auth, wait_on_rate_limit=True)
+
+
 def get_tweet_by_link(url):
     import tweepy
     
     id_status = url.split('status/')[-1]
 
     #create tweepy's api
-    consumer_key='96Rm00PfMEwtkBjhBoWlGwzDG'
-    consumer_secret='DUdU7P0CpbOAb0whx5pq28qEWlMsZOk3d9DkNZHyvj1bYOPldU'
-    
-    access_token='1214597752098717696-ID8wKAYJgZ3H35ebMAFkVKV1py6w19'
-    access_token_secret='AYrRow7HiU2EUcdQx6co7ZT7dqMnweFOtvOdxHhyJZJYZ'
-    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-    auth.set_access_token(access_token, access_token_secret)
-    api = tweepy.API(auth, wait_on_rate_limit=True)
     
     #query
     status = api.get_status(id_status, tweet_mode="extended")
@@ -49,6 +51,6 @@ def get_tweet_by_link(url):
     return([content,author,create_date,verified_pic,retweeted,followers_count,profile_pic])
 
 #start = time.time()
-#print(get_tweet_by_link("https://twitter.com/lookatkch22/status/1498603817566310400"))
+#print(get_tweet_by_link("https://twitter.com/ttraisuree/status/1466343303998181378"))
 #")
 #print('\ntimer %s seconds'%(time.time()-start))

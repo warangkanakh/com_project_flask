@@ -7,7 +7,8 @@ import related_news #related_news
 import datetime
 from datetime import timedelta
 from datetime import timezone
-
+import re
+import pymongo
 
 
 # def dateFormat(text):
@@ -15,7 +16,29 @@ from datetime import timezone
 #     new_time = text.astimezone(tz) 
 #     return new_time
 
+def warning_news():
+    
+    myclient = pymongo.MongoClient("mongodb+srv://warangkana_kh:Sadaharu123@cluster0.h4ueo.mongodb.net/fakenews_db?retryWrites=true&w=majority")
+    db = myclient['fakenews_db']
+    warning_news = db['warning_news']
 
+    x = datetime.datetime.now()
+    only_date = datetime.datetime.now().date()
+    tz = timezone(timedelta(hours=7))
+  
+    new_time = x.astimezone(tz)
+    only_date=str(only_date)
+    only_date="2022-01-28"
+    #print(only_date)
+
+    warning_list = []
+    for i in warning_news.find():
+        if re.findall(only_date,i['datetime']):
+            userdict = i
+            warning_list.append(userdict)
+        warning_list[0]['predicted'] = setFormat(warning_list[0]['predicted'])
+        len_warning_list = len(warning_list)
+    return warning_list
 
 #model predict function
 new_model = tf.keras.models.load_model('my_model_new')
@@ -24,8 +47,6 @@ def predicted(input_text):
     predicted = new_model.predict(result)
     predicted = preprocessing.binarize(predicted)
     result_binary = int(predicted[0][0])
-    
-  
     return result_binary
 
 
@@ -59,3 +80,9 @@ def checkByLink(Link):
     profile_pic = tweet_detail[6]
     all_detail_tweet = [user,status,created_at,verified,retweeted,followers,predictedBy_model,related_news,profile_pic]
     return all_detail_tweet
+
+'''
+text = "ฉีดวัคซีนไฟเซอร์หรือโมเดอร์นา จะมีชีวิตอยู่ได้ไม่เกิน 2 ปี"
+result = predicted(text)
+related = search_related(text)
+'''
