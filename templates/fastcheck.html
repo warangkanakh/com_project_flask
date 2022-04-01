@@ -28,12 +28,16 @@
   <!-- Template Main CSS File -->
   <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/style.css') }}">
 
+
+
   <!-- =======================================================
   * Template Name: Eterna - v4.7.0
   * Template URL: https://bootstrapmade.com/eterna-free-multipurpose-bootstrap-template/
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+
+
 </head>
 
 <body>
@@ -87,9 +91,12 @@
         <form name = "bytext"action = "result" method="POST" class="mx-auto" style="width: 500px;" onsubmit="return checkEmpty();" required>
           <div class="input-group">        
             <textarea class="form-control" aria-label="With textarea" id="text" name="text" rows="4" style="font-size: 22px" maxlength="280" size="280" placeholder="ฉีดวัคซีนไฟเซอร์หรือโมเดอร์นา จะมีชีวิตอยู่ได้ไม่เกิน 2 ปี"></textarea>
-          </div>
+            
+            </div>
+          </div>          
           <br>
-          <button class="btn btn-outline-secondary" id="submitbutton" type="submit" style="font-size: 22px;">ตรวจสอบ</button>
+          <button class="btn btn-outline-secondary" id="submitbutton" type="submit" style="font-size: 22px;">ตรวจสอบ
+          </button>
           <br>  
         </form>
           <br>
@@ -98,7 +105,11 @@
           <br>
           <div class="white-space"></div>
 
-        <script>
+          
+         
+          
+    <script>
+
           function checkEmpty(output){
             var text = document.forms['bytext']['text'].value;
             
@@ -109,6 +120,8 @@
             else{
           document.getElementById('submitbutton').disabled = true;
           document.getElementById('submitbutton').style.opacity='0.5';
+          
+      
          }
             return true
           }

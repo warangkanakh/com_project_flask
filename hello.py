@@ -31,6 +31,7 @@ def text_result():
         predict = all_function.predicted(text)
         predict = all_function.setFormat(predict)
         news_related = all_function.search_related(text)
+        
         #array= ['เลือดของผู้ที่ฉีดวัคซีนโควิดมีสีดำคล้ำ ไม่สามารถนำไปใช้รักษาผู้ป่วยได้','มีแนวโน้มเป็นข่าวปลอม','https://www.antifakenewscenter.com/%E0%B8%9C%E0%B8%A5%E0%B8%B4%E0%B8%95%E0%']
         #text = array[0]
         #predict = array[1]
@@ -63,3 +64,8 @@ def tweet_result():
         return render_template("result_tweet.html",all_detail = all_detail)
     except:
         return render_template("error.html")
+
+
+if __name__ == '_main_':
+    app.debug = True
+    app.run()

@@ -49,6 +49,7 @@
       else{
         document.getElementById('submitbutton').disabled = true;
         document.getElementById('submitbutton').style.opacity='0.5';
+        document.getElementById('submitbutton').html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Loading...').attr('disabled', true);
       }
       return true
     }

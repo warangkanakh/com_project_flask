@@ -17,7 +17,7 @@ api = tweepy.API(auth, wait_on_rate_limit=True)
 
 
 def get_tweet_by_link(url):
-    import tweepy
+    
     
     id_status = url.split('status/')[-1]
 
