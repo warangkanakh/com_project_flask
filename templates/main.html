@@ -98,24 +98,23 @@
     <!-- ======= Featured Section ======= -->
     <section id="featured" class="featured">
       <div class="container">
-
         <div class="row">
           <div class="col-lg-4">
-            <div class="icon-box">
+            <div class="icon-box" onclick="warning_news()" id="icon-box">
               <i class="bi bi-card-checklist"></i>
               <h3><a href="/warning_news">ข่าวเฝ้าระวัง</a></h3>
               <p>ข่าวที่มีเนื้อหาควรเฝ้าระวัง</p>
             </div>
           </div>
           <div class="col-lg-4 mt-4 mt-lg-0">
-            <div class="icon-box">
+            <div class="icon-box" onclick="text_check()" id="icon-box1">
               <i class="bi bi-bar-chart"></i>
               <h3><a href="/checkByText">ตรวจสอบข่าวด้วยข้อความ</a></h3>
               <p>ตรวจสอบข่าวด้วยข้อความ</p>
             </div>
           </div>
           <div class="col-lg-4 mt-4 mt-lg-0">
-            <div class="icon-box">
+            <div class="icon-box" onclick="link_check()" id="icon-box2">
               <i class="bi bi-binoculars"></i>
               <h3><a href="/checkByTweetLink">ตรวจสอบข่าวด้วยลิงก์ทวีต</a></h3>
               <p>ตรวจสอบข่าวด้วยลิงก์ของทวีตต้นทาง</p>
@@ -126,6 +125,23 @@
       </div>
     </section><!-- End Featured Section -->
 
+
+    <script>
+
+      var cursor = document.getElementById("icon-box").style.cursor = "pointer"; 
+      var cursor1 = document.getElementById("icon-box1").style.cursor = "pointer"; 
+      var cursor2 = document.getElementById("icon-box2").style.cursor = "pointer"; 
+      
+      function warning_news(){
+        document.location = "/warning_news";
+      }
+      function text_check(){
+        document.location = "/checkByText";
+      }
+      function link_check(){
+        document.location = "/checkByTweetLink";
+      }
+    </script>
    
   </main><!-- End #main -->
 
