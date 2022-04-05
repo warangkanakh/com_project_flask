@@ -11,10 +11,6 @@ import re
 import pymongo
 import urllib
 
-myclient = pymongo.MongoClient("mongodb+srv://warangkana_kh:Sadaharu123@cluster0.h4ueo.mongodb.net/fakenews_db?retryWrites=true&w=majority")
-db = myclient['fakenews_db']
-warning_news = db['warning_news']
-
 
 #model predict function
 new_model = tf.keras.models.load_model('my_model_new')
@@ -65,20 +61,14 @@ def checkByLink(Link):
     return all_detail_tweet
 
 
-warning_list = []
-for i in warning_news.find():
-    
-    userdict = i
-    warning_list.append(userdict)
-len_warning_list = len(warning_list)
-for i in range(len_warning_list):
-    warning_list[i]['predicted'] = setFormat(warning_list[i]['predicted'])
+
 # def dateFormat(text):
 #     tz = timezone(timedelta(hours=7))
 #     new_time = text.astimezone(tz) 
 #     return new_time
 
 def warning_news():
+    ''' 
     x = datetime.datetime.now()
     only_date = datetime.datetime.now().date()
     tz = timezone(timedelta(hours=7))
@@ -87,7 +77,18 @@ def warning_news():
     only_date=str(only_date)
     only_date="2022-01-28"
     #print(only_date)
+    '''
+    myclient = pymongo.MongoClient("mongodb+srv://warangkana_kh:Sadaharu123@cluster0.h4ueo.mongodb.net/fakenews_db?retryWrites=true&w=majority")
+    db = myclient['fakenews_db']
+    warning_news = db['warning_news']
 
+    warning_list = []
+    for i in warning_news.find():
+        userdict = i
+        warning_list.append(userdict)
+    len_warning_list = len(warning_list)
+    for i in range(len_warning_list):
+        warning_list[i]['predicted'] = setFormat(warning_list[i]['predicted'])
     return warning_list
 '''
 text = "ฉีดวัคซีนไฟเซอร์หรือโมเดอร์นา จะมีชีวิตอยู่ได้ไม่เกิน 2 ปี"
