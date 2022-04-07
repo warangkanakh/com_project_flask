@@ -1,0 +1,14 @@
+PYTHON FILE
+hello.py = Main Flask เชื่อมต่อกับเว็บไซต์
+Function = RNN Model แบบจำลองสำหรับทำนายผล
+getTweetById = ดึงข้อมูลทวีตจากทวิตเตอร์ด้วย Tweepy
+daily_search = ค้นหาข่าวปลอมสำหรับฟังก์ชั่น warning news
+related_news = ค้นหาข่าวที่เกี่ยวข้อง
+all_function = รวมฟังก์ชันการทำงานทั้งหมด
+
+
+FOLDER
+templates = Template ทั้งหมดของเว็บไซต์
+static = ไฟล์อื่นๆที่ทำงานร่วมกับเว็บไซต์ เช่น javascript(.js), css
+model_code = Code ของโมเดลทั้งหมด (Naive Bayes, RNN, LSTM) และ dataset
+my_model_new = Model ที่ผ่านการฝึกแล้ว เตรียมพร้อม Deploy

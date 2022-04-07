@@ -1,6 +1,6 @@
 import tensorflow as tf
 from sklearn import preprocessing
-import Function #model
+import rnn_model #model
 import getTweetById
 import related_news #related_news
 
@@ -15,7 +15,7 @@ import urllib
 #model predict function
 new_model = tf.keras.models.load_model('my_model_new')
 def predicted(input_text):
-    result = Function.preprocess_input_text(input_text)
+    result = rnn_model.preprocess_input_text(input_text)
     predicted = new_model.predict(result)
     predicted = preprocessing.binarize(predicted)
     result_binary = int(predicted[0][0])
@@ -29,6 +29,7 @@ def search_related(input_text):
     found = decode_url(found)
     return found
 
+#result format function
 def setFormat(text):
     text = str(text)
     if text=="0":

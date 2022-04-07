@@ -18,10 +18,10 @@ from pythainlp.tag.named_entity import ThaiNameTagger
 ner = ThaiNameTagger()
 from sklearn import preprocessing
 
-File_9000 = 'model_code/final_2000_clean.csv'
-f9000 = pd.read_csv(File_9000,encoding='utf-8')
-x = f9000['news']
-y = f9000['label']
+File_2000 = 'model_code/final_2000_clean.csv'
+f2000 = pd.read_csv(File_2000,encoding='utf-8')
+x = f2000['news']
+y = f2000['label']
 # test_file = 'test10new.csv'
 # test = pd.read_csv(test_file,encoding='utf-8')
 

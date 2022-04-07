@@ -39,6 +39,7 @@ def get_tweet_by_link(url):
     profile_pic = profile_pic.replace("_normal.jpg","_400x400.jpg")
     
     # get the screen names of the retweeters and follower
+    '''
     retweet_list = []
     for retweet in api.get_retweets(id=id_status):
         retweet_list.append(retweet.user.screen_name)
@@ -46,8 +47,10 @@ def get_tweet_by_link(url):
     follower_list = []
     for follower in api.get_followers(screen_name=author):
         follower_list.append(follower.screen_name)
-    return([content,author,create_date,verified_pic,retweeted,followers_count,profile_pic])
-
+    '''
+    all_tweet = [content,author,create_date,verified_pic,retweeted,followers_count,profile_pic]
+    return all_tweet
+    
 #start = time.time()
 #print(get_tweet_by_link("https://twitter.com/ttraisuree/status/1466343303998181378"))
 #")
